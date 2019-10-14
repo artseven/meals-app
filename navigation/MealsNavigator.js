@@ -31,46 +31,51 @@ const MealsNavigator = createStackNavigator(
   }
 );
 
+const tabScreenConfig = {
+  Meals: {
+    screen: MealsNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons
+            name="ios-restaurant"
+            size={25}
+            color={tabInfo.tintColor}
+          ></Ionicons>
+        );
+      }
+    }
+  },
+  Favorites: {
+    screen: FavoritesScreen,
+    navigationOptions: {
+      tabBarLabel: "Favorites!",
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons
+            name="ios-star"
+            size={25}
+            color={tabInfo.tintColor}
+          ></Ionicons>
+        );
+      },
+      tabBarColor: Colors.primaryColor
+    }
+  }
+}
+
 const MealsFavTabNavigator =
   Platform.OS === "android"
-    ? createMaterialBottomTabNavigator()
+    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+      activeTintColor: Colors.secondaryColor,
+      shifting: true
+    })
     : createBottomTabNavigator(
-        {
-          Meals: {
-            screen: MealsNavigator,
-            navigationOptions: {
-              tabBarIcon: tabInfo => {
-                return (
-                  <Ionicons
-                    name="ios-restaurant"
-                    size={25}
-                    color={tabInfo.tintColor}
-                  ></Ionicons>
-                );
-              }
-            }
-          },
-          Favorites: {
-            screen: FavoritesScreen,
-            navigationOptions: {
-              tabBarLabel: "Favorites!",
-              tabBarIcon: tabInfo => {
-                return (
-                  <Ionicons
-                    name="ios-star"
-                    size={25}
-                    color={tabInfo.tintColor}
-                  ></Ionicons>
-                );
-              }
-            }
-          }
-        },
+        tabScreenConfig,
         {
           tabBarOptions: {
             activeTintColor: Colors.secondaryColor
           }
-        }
-      );
+        });
 
 export default createAppContainer(MealsFavTabNavigator);
