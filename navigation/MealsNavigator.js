@@ -9,6 +9,7 @@ import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import FavoritesScreen from '../screens/FavoritesScreen';
 import { Ionicons } from "@expo/vector-icons";
+import {} from 'react-navigation-material-bottom-tabs';
 
 const MealsNavigator = createStackNavigator({
   Categories: {
@@ -34,6 +35,7 @@ const MealsFavTabNavigator = createBottomTabNavigator({
     }
   }},
   Favorites: {screen: FavoritesScreen, navigationOptions: {
+    tabBarLabel: 'Favorites!',
     tabBarIcon: (tabInfo) => {
       return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor}></Ionicons>;
     }
